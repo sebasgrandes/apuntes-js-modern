@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test de SnapShot Test objetonx 1`] = `
+{
+  "apellido": "Grandes",
+  "edad": 22,
+  "nombre": "Sebastian",
+}
+`;

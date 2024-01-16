@@ -1,0 +1,66 @@
+<!-- snapshots: permiten almacenar datos que se almacenan en otra carpeta para ser comparados con tu toMatchSnapshot
+si modificaste tu objeto original y ahora quieres actualizar el snapshot... puedes reescribir tu snapshot anterior, por el actual, de 3 formas:
+1. en la terminarl al correr tu test lo haras asi: npm t -- -u
+2. eliminas la carpeta de snapshots y vuelves a correr tu test con npm t
+(NO LO HAGAS) 3. edita tu archivo dentro de tu carpeta de snapshots (NO LO HAGAS porque solo jest debe modificar este archivo) -->
+
+El método `.toMatchSnapshot()` en un marco de pruebas como Jest se utiliza para realizar pruebas de instantáneas (snapshot testing). Una "instantánea" es una representación serializada del estado del objeto o componente que se está probando. Esta instantánea se guarda en un archivo durante la primera ejecución del test.
+
+Cuando vuelves a ejecutar la prueba, Jest compara la nueva instantánea del objeto o componente con la instantánea previamente guardada. Si las dos instantáneas coinciden, la prueba pasa. Si no coinciden, la prueba falla, y se te mostrarán las diferencias entre las dos instantáneas para que puedas decidir si el cambio es intencionado y deseado.
+
+En el código que proporcionaste:
+
+```javascript
+const objetox = {
+    nombre: "Sebastian",
+    apellido: "Grandeqs",
+    edad: 22,
+};
+
+describe("Test de SnapShot", () => {
+    test("Test objetonx", () => {
+        expect(objetox).toMatchSnapshot();
+    });
+});
+```
+
+Estás definiendo un conjunto de pruebas (`describe`) con un solo test (`test`). En este test, estás comprobando si el objeto `objetox` coincide con una instantánea previamente guardada.
+
+-   La primera vez que se ejecute este código, Jest creará una instantánea de `objetox` y la guardará en un archivo.
+-   En futuras ejecuciones, Jest comparará el estado actual de `objetox` con la instantánea guardada.
+-   Si `objetox` ha cambiado desde la última vez que se creó o actualizó la instantánea, la prueba fallará.
+
+Este tipo de pruebas es especialmente útil para detectar cambios no intencionados en componentes o estructuras de datos. Sin embargo, es crucial actualizar las instantáneas cuando se realizan cambios intencionados y revisar cuidadosamente las diferencias cuando las pruebas de instantáneas fallan.
+
+# la primera vez solo crea la instantanea? o también compara el objeto con la instantanea?
+
+La primera vez que ejecutas una prueba que utiliza `.toMatchSnapshot()`, Jest crea una nueva instantánea del objeto o componente que se está probando. Esta instantánea se guarda en un archivo para comparaciones futuras. Dado que no hay una instantánea previa con la que comparar en esta primera ejecución, la prueba se considera exitosa automáticamente al crear la instantánea.
+
+En resumen, la primera vez solo se crea la instantánea y no hay una comparación con instantáneas anteriores, ya que no existen. En ejecuciones subsiguientes, Jest usará esta instantánea guardada para compararla con el estado actual del objeto o componente. Si hay una coincidencia, la prueba pasará; de lo contrario, fallará, indicando que hubo un cambio.
+
+# y que hay de cuando actualizo el snapshot... aqui también solo se actualiza y no lo compara cierto=?
+
+Correcto, cuando actualizas un snapshot utilizando comandos como `jest --updateSnapshot` o su alias `jest -u`, lo que sucede es que Jest sobrescribirá los snapshots existentes con los nuevos estados de los objetos o componentes que estás probando. Durante este proceso de actualización, no se realiza ninguna comparación; simplemente se actualizan los archivos de instantáneas para reflejar el nuevo estado.
+
+Este es un paso que generalmente se realiza después de haber revisado cuidadosamente las diferencias señaladas en una prueba fallida de snapshot y haber determinado que los cambios son intencionales y correctos. Una vez que actualizas los snapshots, estos servirán como la nueva "versión de verdad" contra la cual se compararán los estados futuros en las pruebas subsiguientes.
+
+Por lo tanto, es muy importante ser cauteloso al actualizar snapshots para asegurarte de que los cambios son realmente los que esperas, ya que esto establecerá un nuevo punto de referencia para todas las pruebas futuras.
+
+# que significa el - y + en los errores de la 2da corrida de test con snapshot
+Los símbolos "-" y "+" en la salida del test son indicativos de las diferencias entre el snapshot almacenado y el snapshot generado en la ejecución actual del test.
+
+- El símbolo "-" indica que esa línea estaba en el snapshot original pero ya no está en el recibido durante la última ejecución de la prueba.
+  
+  ```
+  -       "id": 1698281556400,
+  ```
+
+- El símbolo "+" indica que esa línea es nueva y no estaba en el snapshot almacenado.
+  
+  ```
+  +       "id": 1698281615743,
+  ```
+
+Estos símbolos son una forma estándar de representar diferencias entre dos conjuntos de datos en herramientas de comparación de texto, y se usan frecuentemente en control de versiones de software como Git.
+
+En resumen, el "-" muestra lo que se ha eliminado del snapshot original para hacerlo igual al nuevo, y el "+" muestra lo que tendría que añadirse al snapshot original para hacerlo igual al nuevo.

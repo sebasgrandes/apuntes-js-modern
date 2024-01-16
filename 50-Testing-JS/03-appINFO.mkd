@@ -1,0 +1,80 @@
+# Sobre el codigo
+
+Este código es un ejemplo simple de cómo podrías implementar pruebas unitarias en JavaScript utilizando funciones asíncronas y promesas. Veamos cada parte del código por separado:
+
+### Función `sumarAsync`
+
+```javascript
+function sumarAsync() {
+    return Promise.resolve(sumar(2, 4));
+}
+```
+
+La función `sumarAsync` retorna una promesa que se resuelve inmediatamente con el resultado de la función `sumar(2, 4)`. Aquí, `sumar` es una función hipotética que sumaría los números 2 y 4, y la promesa se resuelve con ese resultado.
+
+### Función `test`
+
+```javascript
+async function test(mensaje, callback) {
+    try {
+        await callback();
+        console.log(`El Test: ${mensaje} se ejecutó correctamente`);
+    } catch (error) {
+        console.error("Error", error);
+    }
+}
+```
+
+Esta es una función `async` que acepta un mensaje y una función de callback como argumentos. El mensaje es una descripción del test que se está ejecutando. La función de callback debería ser una función asíncrona o retornar una promesa. Si la promesa se resuelve sin errores, se imprime un mensaje indicando que el test se ha ejecutado correctamente. Si la promesa se rechaza, se imprime un mensaje de error.
+
+### Bloque de test
+
+```javascript
+test("Suma 2 + 4 y el resultado debe ser 6", async () => {
+    const esperado = 6;
+    const resultado = await sumarAsync();
+    expected(esperado).toBe(resultado);
+});
+```
+
+Aquí estamos utilizando la función `test` para realizar un test unitario. La función anónima `async` se pasa como el segundo argumento a `test`. Dentro de esta función, usamos `await` para esperar el resultado de `sumarAsync()`. Luego, comparamos este resultado con el valor esperado (`esperado`) utilizando una función hipotética `expected().toBe()`. Nota que hay un error tipográfico en tu código: debería ser `expect(esperado).toBe(resultado);` en lugar de `expected(esperado).toBe(resultado);`.
+
+En resumen, este es un ejemplo simple de cómo podrías implementar pruebas unitarias asíncronas en JavaScript. Se espera que el test se ejecute correctamente si la función `sumar(2, 4)` retorna 6, y que falle en caso contrario.
+
+# Sobre Await manejando promesas implicitas de un Async
+
+### mi funcion callback es asincrona pero no devuelve ninguna promesa...
+
+En JavaScript, si marcas una función con la palabra clave `async`, aunque no devuelvas explícitamente una promesa, la función devolverá una promesa de manera implícita.
+
+Por ejemplo, si tienes una función asíncrona como esta:
+
+```javascript
+async function miFuncion() {
+    return "hola";
+}
+```
+
+Si bien no estás devolviendo explícitamente una `Promise`, la palabra clave `async` hace que la función devuelva una promesa que se resuelve con el valor que has retornado ("hola" en este caso).
+
+Por lo tanto, en tu fragmento de código:
+
+```javascript
+await callback();
+```
+
+El `await` está esperando que la promesa implícita devuelta por la función `callback` se resuelva. Dado que `callback` está marcado como `async`, aunque no devuelvas una promesa explícitamente, se devolverá una promesa implícita que se resolverá cuando se complete la función.
+
+### entonces await espera una promesa implicita que devuelve la funcion callback... y esta promesa implicita se resuelve cuando toda la funcion callback se ha completado cierto?
+
+Exactamente, has entendido correctamente. Cuando marcas una función con la palabra clave `async`, esta función devuelve implícitamente una `Promise`. Esta promesa se resuelve con el valor que la función devuelve o se rechaza si se produce una excepción no capturada dentro de la función.
+
+El operador `await` espera a que esta promesa implícita se resuelva, y luego continúa con la ejecución del código que sigue. Si la promesa se resuelve, el valor resuelto se devuelve como resultado de la operación `await`. Si la promesa se rechaza, se lanza una excepción que puede ser capturada por un bloque `catch`.
+
+**Por lo tanto, en tu línea `await callback();`, el `await` esperará hasta que toda la función `callback` se haya completado y la promesa implícita se resuelva.**
+
+### en el caso de mi codigo no interesa el valor devuelto por la promesa cierto? solo interesa usar await para esperar a que el test se de por completado y lance el mensaje
+
+Exacto, en tu código, el valor que devuelve la promesa no es relevante. Lo que importa es que await callback(); en la función test permitirá que el código espere hasta que se complete la función callback. Una vez que se resuelva la promesa (ya sea con un valor o con undefined), continuará la ejecución del código, imprimiendo el mensaje de éxito o fracaso del test.
+
+El uso de await en este caso es para controlar el flujo de ejecución y asegurarte de que el test se complete antes de imprimir cualquier mensaje o realizar cualquier otra operación posterior. No estás interesado en el valor que callback pueda devolver; solo estás usando await para saber cuándo callback ha terminado su ejecución.

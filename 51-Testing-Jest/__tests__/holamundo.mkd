@@ -1,0 +1,6 @@
+// este archivo revisa 2 tests
+
+describe("Grupo de tests", () => {
+    test("Hola mundo", () => {});
+    test("Hi world", () => {});
+});

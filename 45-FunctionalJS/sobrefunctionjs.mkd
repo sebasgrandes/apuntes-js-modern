@@ -1,0 +1,30 @@
+1. que es functional js?
+
+-   crea tu codigo usando funciones
+-   hay reglas: las funciones deben tomar una entrada y tener una salida de datos
+-   no se permite la modificacion de datos
+-   tiene una sintaxis mas de matematicas
+
+2. conceptos claves de functional js
+
+-   inmutabilidad: los datos no deben modificarse <!-- usar const casi siempre -->
+-   separar funciones de datos <!-- los array methods se utilizan mucho en el functional js -->
+-   first-class functions
+
+3. inmutabilidad
+
+-   un dato no puede cambiar
+-   no puedes tener: let cliente = "Juan"; cliente = "pedro";
+
+3. separar funciones de datos
+
+-   Se utilizan mucho funciones que retornan un nuevodato o Array Methods, de esa forma tendremosfunciones que entregan un resultado nuevo pero nuncamodifican los datos.
+
+4. ! first-class functions
+
+-   Es poder crear funciones que parezcan cualquier variable como lo es function expression.
+-   Es tener una sintaxis de esta forma:
+    const suma = function(a, b) { <!-- suma es una referencia a una funcion (es una funcion en el lenguaje cotidiano) -->
+    return a + b;
+    }
+    const resultado = suma ; <!-- ! ya desde que asignas LA FUNCION "suma" a "resultado" es first class functions -->

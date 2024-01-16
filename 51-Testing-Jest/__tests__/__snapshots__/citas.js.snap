@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`grupo de tests Test de actualizacion/edicion de citas 1`] = `
+Citas {
+  "citas": [
+    {
+      "fecha": "26/10/2023",
+      "hora": "20:31",
+      "id": 1698281556400,
+      "mascota": "Negrita",
+      "propietario": "Andre Grandes",
+      "sintomas": "malestar",
+      "telefono": "922382421",
+    },
+  ],
+}
+`;
+
+exports[`grupo de tests Test de creación de cita 1`] = `
+Citas {
+  "citas": [
+    {
+      "fecha": "25/10/2023",
+      "hora": "19:31",
+      "id": 1698281556400,
+      "mascota": "Nala",
+      "propietario": "Sebastian Grandes",
+      "sintomas": "Fiebre, tos, malestar",
+      "telefono": "957245687",
+    },
+  ],
+}
+`;
+
+exports[`grupo de tests Test de eliminacion de citas 1`] = `
+Citas {
+  "citas": [],
+}
+`;

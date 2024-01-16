@@ -1,0 +1,8 @@
+import { sumarex } from "../js/funciones.js";
+
+describe("grupo de tests modulos", () => {
+    test("test de modulo importado", () => {
+        expect(sumarex(1, 2)).toBe(3);
+        // esta exportacion e importacion de la funcion sumar no daría si no fuera gracias a babel
+    });
+});

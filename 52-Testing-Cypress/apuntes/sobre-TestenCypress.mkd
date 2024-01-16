@@ -1,0 +1,21 @@
+# explicame que hace el "visit" "contains", "get" y "exist" y <reference types="cypress" />
+
+El código es un script de pruebas escrito en Cypress, una biblioteca de pruebas de JavaScript para realizar pruebas de extremo a extremo (E2E). A continuación, te explico las funciones que mencionas:
+
+1. **`cy.visit(url)`**: Esta función navega a la URL especificada. Es como si abrieras una nueva pestaña en tu navegador y fueras directamente a esa URL. En tu caso, va a "http://127.0.0.1:5500/52-Testing-Cypress/index.html".
+
+2. **`cy.contains(selector, content)`**: Esta función busca un elemento en el DOM que coincida con el `selector` y que contenga el `content`. En tu caso, busca un elemento `<h1>` que contenga el texto "Administrador de Pacientes de Veterinaria".
+
+3. **`cy.get(selector)`**: Esta función obtiene uno o más elementos del DOM que coincidan con el `selector`. En este caso, obtiene el elemento `<h1>`.
+
+4. **`.should("exist")`**: Este es un aserto que verifica si el elemento obtenido previamente con `cy.get` realmente existe en el DOM.
+
+La línea `/// <reference types="cypress" />` es una directiva para TypeScript. Le indica al editor y al compilador que este archivo depende de los tipos definidos en Cypress. Esto ayuda en el autocompletado y en las comprobaciones de tipos durante el desarrollo.
+
+Aquí tienes un resumen del flujo del script de pruebas:
+
+1. Visita la URL especificada.
+2. Busca un `<h1>` que contenga un texto específico.
+3. Verifica que el `<h1>` realmente exista.
+
+Este script sirve para confirmar que la página cargue correctamente, que tenga un título específico y que el título realmente exista en el DOM.

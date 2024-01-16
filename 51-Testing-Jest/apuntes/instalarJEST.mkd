@@ -1,0 +1,48 @@
+### creamos packeage.json
+
+jest funciona con node.js por lo tanto requiere ese archivo package.json en el que podemos añadir algunos scripts y algunas dependencias.
+
+1. abres tu carpeta en la terminal
+2. digitas: `npm init` -> todo ok (coloca version y autor no mas)
+3. se creará el package.json: desde aqui podemos añadir algunos scripts o sea instalar softwares y dependencias... y mandarlas a llamar para usarlas... este archivo funciona con node
+
+### instalamos jest como dependencia
+
+existen dependencias de desarrollo y del proyecto. jest es una dependencia del desarrollo porque lo estamos haciendo en desarrollo, no en produccion.
+asi que en la misma terminal
+
+1. digitas: `npm i --save-dev jest`
+ <!-- `--save-dev` para instalarlo como dependencia de desarrollo
+ jest es el nombre del paquete
+ -->
+2. se instalará jest
+3. se creará la carpeta node-modules y package-lock.json
+   node-modules contiene muchos archivos porque jest es una dependencia pero tiene otras dependencias
+   el package-lock.json nunca debes modificarlo... mas que nada guarda las referencias de las dependecias que vas intalando
+4. verás en el package.json que tienes como dependencia de desarrollo ("devDependencies) el jest
+5. si abres node-modules se encuentra la carpeta bin donde son una serie de binarios de archivos que puedes ejecutar... ahi aparece jest
+6. en package.json modifica la parte de "scripts" para que en EL VALOR de la propiedad de "test" diga "jest"... esto hara que cuando yo mande a llamra ese script de "test" se ejecute el binario de "jest"
+ <!-- cualquiera de los binarios puede funcionar como binario pero solo requieres el de jest -->
+
+### colocar tus archivos a ser testeados
+
+para colocar tus archivos que quieres testear puedes hacerlo de distintas maneras
+
+1. crear carpeta dedicada para tus tests: (preferida)
+   crea una carpeta en tu raiz, llamada: `__tests__` y dentro colocas tus archivos por ejemplo `holamundo,js`, etc
+
+2. no crear ninguna carpeta, solo modificar nombre del archivo:
+   a cualquier archivo en cualquier carpeta solo debes agregarle el .test: por ejemplo `holamundo.test.js`, etc
+
+### uso de la funcion test()
+
+1. en tus archivos js creados harás uso de la funcion test mediante: `test(mensaje, callback)`
+ <!-- test() = it() -> hacen lo mismo -->
+2. no vas a crear un archivo para cada prueba (test), puedes agruparlos dentro de otra funcion llamada "describe": `describe(mensaje, callback)`. donde en tu callback estarían varios test()
+
+### mandar a llamar a tu script "jest"
+
+en tu misma terminal (de raiz de tu proyecto 51-Testing-Jest) digita (alguno de los 3, hacen lo mismo):
+
+1. `npm run test` = `npm test` = `npm t`
+   esto ejecuta el script de tu package.json que se llama "test" y mandará a llamar al binario "jest"

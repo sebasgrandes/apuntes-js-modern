@@ -1,0 +1,105 @@
+¡Claro! El "renderizado de la página" se refiere al proceso mediante el cual el navegador toma el código HTML, CSS y JavaScript y lo convierte en una página web visual que puedes interactuar. Este proceso es más complicado de lo que parece a primera vista e involucra varios pasos. Cuando se habla de JavaScript y cómo los scripts afectan al renderizado de la página, generalmente se refiere a cómo y cuándo los scripts se ejecutan en relación con este proceso de creación (o renderización) de la página web.
+
+A continuación, describo de manera generalizada cómo es el proceso desde que se solicita una página web hasta que se visualiza en el navegador:
+
+# Fases de Carga y Renderizado de una Página Web:
+
+#### 1. **Solicitud de la Página:**
+
+-   Cuando escribes una URL y presionas "Enter", tu navegador realiza una solicitud HTTP al servidor correspondiente para obtener el documento HTML de la página web.
+
+#### 2. **Descarga del HTML:**
+
+-   El servidor responde a la solicitud y envía el archivo HTML al navegador.
+-   El navegador comienza a leer el archivo HTML desde arriba hacia abajo.
+
+#### 3. **Análisis (Parsing) del HTML:**
+
+-   El navegador analiza el HTML y comienza a construir el **DOM** (Document Object Model), que es una representación estructurada de la página en un formato que el navegador pueda entender y manipular.
+-   Cuando el analizador encuentra etiquetas como `<link>` para CSS o `<script>` para JavaScript, puede realizar solicitudes adicionales al servidor para descargar esos recursos.
+
+#### 4. **Encuentro de un `<script>`:**
+
+-   Cuando el analizador HTML encuentra un elemento `<script>`, el comportamiento depende de cómo este está configurado:
+    -   **Sin `async` ni `defer`:** El analizador HTML se detiene, el script se descarga (si es externo), se ejecuta y luego el analizador HTML continúa.
+    -   **Con `async`:** El script se descarga en paralelo al análisis del HTML, y una vez que se descarga, el análisis HTML se pausa para ejecutar el script, después de lo cual el análisis continúa.
+    -   **Con `defer`:** El script se descarga en paralelo al análisis del HTML, pero no se ejecuta hasta que el análisis del HTML ha terminado.
+
+#### 5. **Descarga y Aplicación de CSS:**
+
+-   Los archivos CSS son descargados y aplicados al DOM para estilizar los elementos de la página. Esta aplicación de estilos también es conocida como renderización.
+
+#### 6. **Renderizado del CSSOM y Construcción del Árbol de Renderizado:**
+
+-   El navegador construye el CSSOM (CSS Object Model) a partir de los estilos descargados y aplica los estilos al DOM para crear el "Árbol de Renderizado".
+-   El árbol de renderizado contiene información sobre cómo deberían visualizarse los elementos en la pantalla.
+
+#### 7. **Layout (Reflujo):**
+
+-   El navegador calcula la geometría (tamaño y posición) de todos los elementos en la página basándose en el árbol de renderizado y genera la disposición visual de la página.
+
+#### 8. **Pintado (Painting):**
+
+-   El navegador "pinta" la página en la pantalla, aplicando colores, imágenes, bordes y demás propiedades visuales según las definiciones de estilos.
+
+#### 9. **Interactividad y Ejecución de JavaScript:**
+
+-   Los scripts que fueron diferidos con `defer` se ejecutan después de que el HTML ha sido totalmente analizado y antes del evento `DOMContentLoaded`.
+-   Una vez que la página ha sido pintada, se vuelve interactiva y los scripts pueden modificar el DOM, agregar interactividad, etc.
+
+### Resumen:
+
+-   **Sin `async` ni `defer`:** Los scripts bloquean el análisis del HTML hasta que son descargados y ejecutados.
+-   **`async`:** Los scripts se descargan de manera asíncrona y se ejecutan tan pronto como están disponibles, pausando el análisis del HTML.
+-   **`defer`:** Los scripts se descargan de manera asíncrona y se ejecutan después de que el análisis del HTML ha finalizado.
+
+Este es un resumen simplificado del proceso completo, pero debería proporcionarte una comprensión básica de cómo los navegadores cargan, interpretan y presentan las páginas web, y cómo `async` y `defer` en los scripts impactan en este proceso.
+
+
+`async` y `defer` son atributos que puedes utilizar en la etiqueta `<script>` en HTML para controlar cómo los scripts externos son ejecutados en relación con la carga de la página. Ambos están diseñados para mejorar el rendimiento de la página al no bloquear el renderizado del HTML mientras el script se descarga y ejecuta. A continuación, se describen estos atributos:
+
+# `async`
+
+Cuando colocas el atributo `async` en un `<script>`, haces que el archivo JavaScript se descargue en paralelo mientras la página se sigue renderizando (analizando el html con el analizador de html) (proceso mediante el cual el navegador toma el código HTML, CSS y JavaScript y lo convierte en una página web visual que puedes interactuar). Una vez que el script es descargado, la ejecución del script tiene lugar, lo que significa que el proceso de renderizado del HTML se pausará hasta que el script haya sido ejecutado. Ejemplo:
+
+```html
+<script async src="script.js"></script>
+```
+
+**Características:**
+- **No bloquea la carga de la página:** La página HTML continúa renderizando mientras el script se descarga.
+- **Ejecución inmediata:** Una vez descargado, el script se ejecuta inmediatamente, bloqueando la renderización de la página durante la ejecución.
+- **Orden de ejecución no garantizado:** Si tienes varios scripts `async`, no se garantiza que se ejecuten en el orden en que aparecen en el documento.
+
+# `defer`
+
+El atributo `defer` también permite que el script se descargue en paralelo al renderizado de la página, pero retrasa la ejecución del script hasta después de que la página se haya renderizado completamente. Ejemplo:
+
+```html
+<script defer src="script.js"></script>
+```
+
+**Características:**
+- **No bloquea la carga de la página:** Al igual que `async`, `defer` permite que la página HTML se siga renderizando mientras el script se descarga.
+- **Ejecución tras renderizado:** El script se ejecutará después de que la página haya sido completamente renderizada y antes del evento `DOMContentLoaded`.
+- **Orden de ejecución garantizado:** A diferencia de `async`, los scripts `defer` se ejecutarán en el orden en que aparecen en el documento.
+
+### Sin `async` ni `defer`
+
+Si no usas `async` ni `defer`, los scripts bloquearán la renderización de la página mientras se descargan y ejecutan, lo que podría afectar negativamente a la experiencia del usuario.
+
+```html
+<script src="script.js"></script>
+```
+
+**Características:**
+- **Bloquea la carga de la página:** La renderización de la página se pausará mientras el script se descarga y ejecuta.
+- **Orden de ejecución garantizado:** Los scripts se ejecutarán en el orden en que aparecen en el documento.
+
+### Conclusión
+
+- Usa `async` cuando el script es independiente del resto de los scripts y del HTML.
+- Usa `defer` para scripts que dependen del DOM o de otros scripts y quieres que se ejecuten en el orden en que aparecen en el documento.
+- No uses ni `async` ni `defer` si el script debe ejecutarse antes del renderizado de la página, aunque en la mayoría de los casos es recomendable evitar este escenario para no afectar la experiencia del usuario.
+
+Nota que estos atributos son ignorados cuando el script tiene un `src` inline (sin atributo `src`).

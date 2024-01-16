@@ -1,0 +1,13 @@
+Babel es un compilador de JavaScript que permite transformar código escrito en versiones modernas de JavaScript (o incluso en sintaxis aún no estandarizada) en versiones más antiguas que son compatibles con la mayoría de los navegadores o entornos de ejecución. Esto es especialmente útil para utilizar características modernas del lenguaje que quizás no estén disponibles en todos los entornos donde se ejecutará tu código.
+
+En el contexto de pruebas de JavaScript, Babel suele utilizarse para varias cosas:
+
+1. **Compatibilidad**: Si estás utilizando sintaxis moderna de JavaScript que Jest (o cualquier otro marco de pruebas) no entiende, puedes usar Babel para transformar el código a una versión que sí entienda.
+
+2. **JSX y otras sintaxis**: Si estás escribiendo pruebas para una aplicación de React u otra biblioteca que utiliza JSX o alguna otra sintaxis no estándar, Babel puede compilar ese código a JavaScript estándar que pueda ser entendido y ejecutado.
+
+3. **Soporte para importaciones y características más recientes**: Puedes querer importar módulos o utilizar características de JavaScript más recientes que no están disponibles en tu entorno de pruebas. Babel te permite hacer esto transformando el código según sea necesario.
+
+4. **Optimización del código durante las pruebas**: Puedes configurar Babel para que aplique ciertas optimizaciones o instrumentaciones durante la fase de pruebas, como la inclusión de información adicional para la recolección de datos durante la ejecución de las pruebas.
+
+Por lo general, para utilizar Babel en tu entorno de pruebas, tendrás que instalar algunas dependencias de desarrollo y crear o modificar un archivo de configuración de Babel (normalmente `.babelrc` o `babel.config.js`). Esto le dirá a Jest cómo debe utilizar Babel para transformar tu código antes de ejecutar las pruebas.

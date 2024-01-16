@@ -1,0 +1,48 @@
+### performance.now()
+
+la pestaña network del apartado de la chrome dev tools te da el tiempo que demoran la apis por ejemplo o la descarga de archivos html, css o js
+
+con performance.now() al inicio y final de un extracto de codigo puedes calcular el tiempo que demora ese extracto (por ejemplo un foreach o for o una funcion determinada)
+
+### async o defer -> defer de preferencia
+
+en tu script de js del html
+
+el analizador va de arriba hacia abajo en el html, analizando cada elemento, construyendolo en el dom (completandolo), y pasando al siguiente elemento para ser analizado...
+
+-   async: Si un script es async, se descarga de manera asíncrona mientras el HTML (posterior) se está analizando. Se ejecutará tan pronto como se descargue, independientemente de su posición en el HTML.
+-   defer: Si un script es defer, se descargará de manera asíncrona mientras el HTML (posterior) se está analizando, pero no se ejecutará hasta que el analizador haya terminado completamente, incluso si el script está al inicio del documento.
+
+Cuando el analizador de HTML encuentra un tag script, todo el HTML que precede a ese script ha sido ya analizado y los correspondientes nodos del DOM han sido creados. Si tu script está ubicado al final del documento HTML y no intenta interactuar con elementos que se encuentren después de él en el código, los elementos con los que intenta interactuar deberían, en teoría, estar ya disponibles en el DOM.
+
+### debugger
+
+cuando lo pones en tu codigo js... en sources (local) te muestran las variables incluyendo sus valores... que se crearon hasta ese pedazo de codigo (aun asi le vuelvas a dar play, tomará solo aquellas que estan antes del debugger)
+**debugger detiene la ejecución..**. si quieres continuar, preciona el play. también puedes darle play para continuar al siguiente debugger que hayas colocado.
+
+### opciones para ofuscar el codigo de javascript
+
+ofuscar codigo: convertirlo a codigo que sea dificil de leer
+funciona mejor ofuscar codigos pequeños, no largos como el de este proyecto
+
+-   javascript2img.com -> genera codigo ofuscado
+-   beautifier.com -> desofusca algunos codigos
+
+#### medidas de seguridad
+
+**seguridad en javascript**
+
+-   no almacenes passwords (tarjetas de credito, imagenes) en localstorages ni indexedDB o similares... no son sus propositos
+-   el dom scripting ya escapa los datos (o sea que evita algunas vulnerabilidades al usar scripting) y evita riesgos de seguridad... por lo que debes utilizar textContent en la mayoria de las veces
+-   usa innerHTML solo cuando la fuente de los datos es segura (o sea estas consumiendo tu propia api... pero de preferencia usa dom scripting)
+
+**formularios**
+
+-   valida en el cliente (js) para retroalimentacion en tiempo real, pero también en el servidor... no confies mucho en pasar esa validacion
+-   si deseas crear apps con autenticacion de usuarios puedes usar JWT y Auth()
+
+**otras consideraciones**
+
+-   cuando trabajes con dependencias utiliza una herramienta para verificar vulnerabilidades como snyk.io
+-   ofusca el codigo si lo consideras necesario
+-   hashea informacion sensible con bcrypt (por ejemplo hashea passwords)

@@ -1,0 +1,13 @@
+En el contexto de un proyecto de software, las "dependencias" son paquetes o módulos externos que tu proyecto necesita para funcionar correctamente. Estos se especifican en el archivo `package.json` en proyectos Node.js.
+
+Hay principalmente dos tipos de dependencias en un proyecto Node.js:
+
+1. **Dependencias de Producción (Dependencies)**: Son las bibliotecas que son necesarias para que la aplicación funcione. Por ejemplo, si estás construyendo una aplicación web con Express, entonces Express es una dependencia de producción. Se instalan con el comando `npm install <nombre-del-paquete>` y se registran en la sección `"dependencies"` del archivo `package.json`.
+
+2. **Dependencias de Desarrollo (DevDependencies)**: Son las bibliotecas que son necesarias sólo para desarrollo y pruebas, pero no son necesarias para la aplicación en producción. Por ejemplo, herramientas de linting como ESLint, o bibliotecas de pruebas como Mocha, serían dependencias de desarrollo. Se instalan con el comando `npm install <nombre-del-paquete> --save-dev` y se registran en la sección `"devDependencies"` del archivo `package.json`.
+
+### ¿Qué es una Dependencia de Desarrollo?
+
+Una Dependencia de Desarrollo es un paquete o biblioteca que es útil durante el desarrollo del proyecto pero no es necesario para que el proyecto funcione en producción. Por ejemplo, podrías usar una herramienta que minimiza y optimiza tu código para producción; esa herramienta sería una dependencia de desarrollo porque no la necesitas para que tu aplicación funcione, pero sí para optimizar el código que se desplegará.
+
+Es crucial entender la diferencia entre estos dos tipos de dependencias para gestionar eficazmente tu proyecto y asegurar que sólo se incluyan en la producción los paquetes que son absolutamente necesarios, reduciendo así el tamaño y el tiempo de carga de la aplicación.

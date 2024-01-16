@@ -1,0 +1,8 @@
+1. creas tu archivo .babelrc y coloca el contenido correspondiente
+ <!--
+ -env: porque vas a usar este preset
+ targets: dices que versiones soportará
+ -->
+2. en la terminal, instalas la dependencia para node: npm i --save-dev @babel/preset-env
+
+<!-- aqui usamos babel para hacer uso de import y export (versiones modernas), para transpilarlo a versionones antiguas de js, de tal manera que el proyecto de node que solo soporta la sintaxis de common js (version antigua de import y export, o sintaxis antigua de js) LO ENTIENDA... porque node a veces no entiende versiones modernas de js (node se demora en actualizar o darle soporte) -->

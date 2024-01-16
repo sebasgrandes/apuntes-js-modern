@@ -1,0 +1,37 @@
+# que es cypress
+
+herramienta para hacer testing de la siguiente generacion.
+con cypress es posible saber que ve el usuario en pantalla (con los demas nou)
+cypress.io
+ES UTIL PARA SABER QUE ES LO QUE ESTA PASANDO EN TU APLICACION... Y ASI LA TENGAS DE MEJOR CALIDAD
+
+# tipos de pruebas en cypress
+
+ofrece end to end, pruebas unitarias y de integracion
+funciona en el navegador: puedes probar con proyectos hechos en java, python, php, node siempre y cuando se vean en el navegador.
+
+# instalacion
+
+al igual que jest, lo instalas con npm
+
+1. terminal de carpeta > npm init: crea tu archivo package.json. coloca tu nombre y lo demas
+2. terminal > npm i --save-dev cypress: se instala
+ <!-- en jest... en package.json cambiabamos en scripts > test: "jest"... estos son npm. -> npm start correria los scripts de package.json
+ en el caso de cypress se corre por medio de npx. la diferencia es que no estaria instalado toda la dependencia completa en la compu. open abre la aplicacioin de escritorio de cypress. y run abre las pruebas en el sielai -->
+3. terminal > npx cypress open -> abre la aplicacion de escritorio de cypress
+4. click a e2e en la aplicacion de escritorio. se crearan carpetas. elige el navegador y se abrira cypress en el navegador.
+5. puedes elegir entre crear specs de ejemplo o una plantilla para ti
+6. al darle al ejemplo creara cypress/e2e/ejemplos...
+7. dentro de la carpeta cypress/e2e creas tus pruebas colocando al final ".cy.js". por ejemplo "hola_test.cy.js". asi cypress lo reconoce automaticamente
+8. la sintaxis es similar a la de jest, o sea puedes usar describe(), it()... PERO ya no test(). checa la sintaxis en tu archivo de test
+9. abres tu test solo dandole click a tu archivo que aparecerpa en la aplicacion de cypress abierta en el navegador
+10. para que el codigo que escribes en vs code tenga un mejor autocompletado (en base a cypress) pones al inicio de todo tu archivo de test esto: `/// <reference types="cypress" />` (sin las comillas)
+<!-- La línea /// <reference types="cypress" /> es una directiva para TypeScript. Le indica al editor y al compilador que este archivo depende de los tipos definidos en Cypress. Esto ayuda en el autocompletado y en las comprobaciones de tipos durante el desarrollo. -->
+
+# 2 versiones de cypress
+
+1. npx cypress open -> abre la app de escritorio que esta basado en electron. con interfaz grafica y todo
+2. npx cypress run -> ejecuta cypress desde la misma terminal (sin interfaz)
+
+-   también crea videos que te muestran visualmente como se ejecuta tu codigo en el navegador
+-   puedes modificar la calidad del video en cypress.config.js colocando: videoCompression: 0 -> 0 al 1
