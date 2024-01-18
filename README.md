@@ -1,9 +1,10 @@
 # Apuntes de JavaScript Moderno
 
-**Apuntes y práctica-teoria de (casi) todas secciones del curso JavaScript Moderno de Juan Pablo De la Torre Valdez**
+Los proyectos que realicé de la parte práctica del curso los encuentras [aquí](https://github.com/sebasgrandes/projects-js-modern/).
 
-_Aquellas carpetas (numeradas) faltantes son **proyectos** que subiré en otros repositorios_
+Apuntes y notas realizadas como parte del curso JavaScript Moderno de Juan Pablo de la Torre Valdez.
 
-Aquellos archivos que están vacios o parcialmente vacios es porque dicho concepto ya se vió anteriormente en el curso Desarrollo Web Completo. _Los apuntes están aqui: https://github.com/sebasgrandes/intro-javascript-dwc_
+_Aquellos archivos de teoría que están vacios o parcialmente vacios es porque dicho concepto ya se vió anteriormente en el curso Desarrollo Web Completo. Los apuntes están [aquí](https://github.com/sebasgrandes/apuntes-dwc)_  
+_Aquellas carpetas (numeradas) faltantes son **proyectos** que subí en [este repositorio](https://github.com/sebasgrandes/projects-js-modern)_
 
-Disfruta!!
+Visita la [página del curso](https://www.udemy.com/course/javascript-moderno-guia-definitiva-construye-10-proyectos/) para inscribirte.
